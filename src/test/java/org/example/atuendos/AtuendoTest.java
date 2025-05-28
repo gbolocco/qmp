@@ -1,7 +1,9 @@
-package org.example;
+package org.example.atuendos;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PrendaTest {
+class AtuendoTest {
+
+
 
 }
