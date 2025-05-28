@@ -1,12 +1,13 @@
 package org.example.uniformesBonusQMP2.criteriosUniforme;
 
-import org.example.Prenda;
+import org.example.prenda.Prenda;
+import org.example.prenda.Tipo;
 
 public abstract class CriterioUniforme {
 
-  public Prenda.Tipo tipo;
+  public Tipo tipo;
 
-  public CriterioUniforme(Prenda.Tipo tipo){
+  public CriterioUniforme(Tipo tipo){
     this.tipo = tipo;
   }
 

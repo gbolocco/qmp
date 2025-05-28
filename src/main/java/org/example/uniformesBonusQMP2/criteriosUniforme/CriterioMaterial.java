@@ -1,13 +1,14 @@
 package org.example.uniformesBonusQMP2.criteriosUniforme;
 
-import org.example.Prenda;
-import org.example.Material;
+import org.example.prenda.Prenda;
+import org.example.prenda.Material;
+import org.example.prenda.Tipo;
 
 public class CriterioMaterial extends CriterioUniforme {
 
   Material.TipoMaterial material;
 
- public CriterioMaterial(Prenda.Tipo tipo, Material.TipoMaterial material){
+ public CriterioMaterial(Tipo tipo, Material.TipoMaterial material){
    super(tipo);
    this.material = material;
  }

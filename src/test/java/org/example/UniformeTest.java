@@ -3,19 +3,20 @@ package org.example;
 // holaaa
 
 import java.util.List;
+import org.example.borrador.Borrador;
+import org.example.prenda.Color;
+import org.example.prenda.Material;
+import org.example.prenda.Prenda;
+import org.example.prenda.Tipo;
 import org.example.uniformesBonusQMP2.Institucion;
 import org.example.uniformesBonusQMP2.Uniforme;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioColor;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioMaterial;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioUniforme;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*; // ← ¡esto es clave!
 
 
@@ -28,43 +29,50 @@ import static org.junit.jupiter.api.Assertions.*; // ← ¡esto es clave!
 class UniformeTest {
 
   List<CriterioUniforme> criteriosJhonson;
+  List<CriterioUniforme> criteriosSanJuan;
   List<Prenda> uniformeJhonson;
   List<Prenda> uniformeSanJuan;
+  List<Prenda> uniformeNoValido;
 
   @BeforeEach
   void setUp() {
 
     // SAN JUAN
-    Prenda zapatillasBlancas = new Prenda.Builder(Prenda.Tipo.ZAPATO, new Material(Material.TipoMaterial.CUERO)).setColorPrimario(Prenda.Color.BLANCO).build();
-    Prenda chombaVerde = new Prenda.Builder(Prenda.Tipo.CHOMBA, new Material(Material.TipoMaterial.TELA,Material.Trama.PIQUE)).setColorPrimario(Prenda.Color.VERDE).build();
-    Prenda pantalonAcetatoGris = new Prenda.Builder(Prenda.Tipo.PANTALON, new Material(Material.TipoMaterial.ACETATO)).setColorPrimario(Prenda.Color.GRIS).build();
+    Prenda zapatillasBlancas = new Borrador(Tipo.ZAPATO, new Material(Material.TipoMaterial.CUERO)).setColorPrimario(Color.BLANCO).crearPrenda();
+    Prenda chombaVerde = new Borrador(Tipo.CHOMBA, new Material(Material.TipoMaterial.TELA,Material.Trama.PIQUE)).setColorPrimario(Color.VERDE).crearPrenda();
+    Prenda pantalonAcetatoGris = new Borrador(Tipo.PANTALON, new Material(Material.TipoMaterial.ACETATO)).setColorPrimario(Color.GRIS).crearPrenda();
 
-    CriterioColor sanJuan1 = new CriterioColor(Prenda.Tipo.CHOMBA, Prenda.Color.VERDE);
-    CriterioMaterial sanJuan2 = new CriterioMaterial(Prenda.Tipo.ZAPATO, Material.TipoMaterial.CUERO);
-    CriterioColor sanJuan3 = new CriterioColor(Prenda.Tipo.CAMISA, Prenda.Color.GRIS);
-    CriterioColor sanJuan4 = new CriterioColor(Prenda.Tipo.CAMISA, Prenda.Color.BLANCO);
+    CriterioColor sanJuan1 = new CriterioColor(Tipo.CHOMBA, Color.VERDE);
+    CriterioMaterial sanJuan2 = new CriterioMaterial(Tipo.ZAPATO, Material.TipoMaterial.CUERO);
+    CriterioColor sanJuan3 = new CriterioColor(Tipo.CAMISA, Color.GRIS);
+    CriterioColor sanJuan4 = new CriterioColor(Tipo.CAMISA, Color.BLANCO);
 
-    List<CriterioUniforme> criteriosSanJuan = List.of(sanJuan1, sanJuan2, sanJuan3, sanJuan4);
-    List<Prenda> uniformeSanJuan = List.of(zapatillasBlancas, chombaVerde, pantalonAcetatoGris);
+    criteriosSanJuan = List.of(sanJuan1, sanJuan2, sanJuan3, sanJuan4);
+    uniformeSanJuan = List.of(zapatillasBlancas, chombaVerde, pantalonAcetatoGris);
 
 
     // JHONSON
-    Prenda camisaBlanca = new Prenda.Builder(Prenda.Tipo.CAMISA, new Material(Material.TipoMaterial.TELA)).setColorPrimario(Prenda.Color.BLANCO).build();
-    Prenda pantalonDeVestirNegro = new Prenda.Builder(Prenda.Tipo.PANTALON, new Material(Material.TipoMaterial.DE_VESTIR)).setColorPrimario(Prenda.Color.NEGRO).build();
-    Prenda zapatosNegros = new Prenda.Builder(Prenda.Tipo.ZAPATO,new Material(Material.TipoMaterial.CUERO)).setColorPrimario(Prenda.Color.NEGRO).build();
+    Prenda camisaBlanca = new Borrador(Tipo.CAMISA, new Material(Material.TipoMaterial.TELA)).setColorPrimario(Color.BLANCO).crearPrenda();
+    Prenda pantalonDeVestirNegro = new Borrador(Tipo.PANTALON, new Material(Material.TipoMaterial.DE_VESTIR)).setColorPrimario(Color.NEGRO).crearPrenda();
+    Prenda zapatosNegros = new Borrador(Tipo.ZAPATO,new Material(Material.TipoMaterial.CUERO)).setColorPrimario(Color.NEGRO).crearPrenda();
 
 
-    CriterioColor jhonson1 = new CriterioColor(Prenda.Tipo.CAMISA, Prenda.Color.BLANCO);
-    CriterioMaterial jhonson2 = new CriterioMaterial(Prenda.Tipo.PANTALON, Material.TipoMaterial.TELA);
-    CriterioColor jhonson3 = new CriterioColor(Prenda.Tipo.ZAPATO, Prenda.Color.NEGRO);
-    CriterioColor jhonson4 = new CriterioColor(Prenda.Tipo.PANTALON, Prenda.Color.NEGRO);
+    CriterioColor jhonson1 = new CriterioColor(Tipo.CAMISA, Color.BLANCO);
+    CriterioMaterial jhonson2 = new CriterioMaterial(Tipo.PANTALON, Material.TipoMaterial.TELA);
+    CriterioColor jhonson3 = new CriterioColor(Tipo.ZAPATO, Color.NEGRO);
+    CriterioColor jhonson4 = new CriterioColor(Tipo.PANTALON, Color.NEGRO);
 
-    List<CriterioUniforme> criteriosJhonson = List.of(jhonson1, jhonson2, jhonson3, jhonson4);
-    List<Prenda> uniformeJhonson = List.of(camisaBlanca, pantalonDeVestirNegro, zapatosNegros);
+    criteriosJhonson = List.of(jhonson1, jhonson2, jhonson3, jhonson4);
+    uniformeJhonson = List.of(camisaBlanca, pantalonDeVestirNegro, zapatosNegros);
 
+    uniformeNoValido = List.of(chombaVerde, pantalonAcetatoGris); // solo tiene parte superior y parte inferior
 
   }
 
+  @Test
+  void uniformeNoValido(){
+    assertThrows(IllegalArgumentException.class, () -> new Uniforme(uniformeNoValido));
+  }
 
   @Test
   void validarUniformeJhonson_valido() {
@@ -76,6 +84,7 @@ class UniformeTest {
 
   @Test
   void validarUniformeJhonson_invalidoFalla() {
+
     // Quitar un criterio para que falle
     Institucion jhonson = new Institucion(criteriosJhonson.subList(0, 2));
 

@@ -1,7 +1,7 @@
 package org.example.uniformesBonusQMP2;
 
 import java.util.List;
-import org.example.Prenda;
+import org.example.prenda.Prenda;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioUniforme;
 
 public class Institucion {
@@ -14,7 +14,7 @@ public class Institucion {
 
   public void validarUniforme(List<Prenda> prendas){
     prendas.forEach(prenda -> {
-       if(!criterios.stream().anyMatch(criterio -> criterio.validar(prenda))){
+       if(criterios.stream().noneMatch(criterio -> criterio.validar(prenda))){
          throw new IllegalArgumentException("La prenda no cumple con los criterios de la institucion");
        }
      });

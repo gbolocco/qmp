@@ -1,7 +1,7 @@
 package org.example.atuendos;
 
 import java.util.List;
-import org.example.Prenda;
+import org.example.prenda.Prenda;
 
 public class Atuendo {
   public List<Prenda> prendas;

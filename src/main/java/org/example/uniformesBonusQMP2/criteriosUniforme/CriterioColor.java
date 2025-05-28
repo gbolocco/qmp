@@ -1,12 +1,14 @@
 package org.example.uniformesBonusQMP2.criteriosUniforme;
 
-import org.example.Prenda;
+import org.example.prenda.Color;
+import org.example.prenda.Prenda;
+import org.example.prenda.Tipo;
 
 public class CriterioColor extends CriterioUniforme {
 
-  public Prenda.Color color;
+  public Color color;
 
-  public CriterioColor(Prenda.Tipo tipo, Prenda.Color color){
+  public CriterioColor(Tipo tipo, Color color){
     super(tipo);
     this.color = color;
   }
