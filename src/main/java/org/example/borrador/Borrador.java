@@ -1,6 +1,7 @@
 package org.example.borrador;
 
 import org.example.prenda.Color;
+import org.example.prenda.Formalidad;
 import org.example.prenda.Material;
 import org.example.prenda.Prenda;
 import org.example.prenda.Tipo;
@@ -11,7 +12,7 @@ public class Borrador {
   final public Material material;
   public Color colorPrimario;
   public Color colorSecundario;
-
+  public Formalidad formalidad;
 
     public Borrador(Tipo tipo, Material material){
       this.tipo = tipo;
@@ -25,6 +26,11 @@ public class Borrador {
 
     public Borrador setColorSecundario(Color colorSecundario){
       this.colorSecundario = colorSecundario;
+      return this;
+    }
+
+    public Borrador setFormalidad(Formalidad formalidad){
+      this.formalidad = formalidad;
       return this;
     }
 

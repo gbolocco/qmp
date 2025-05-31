@@ -4,6 +4,7 @@ import java.util.List;
 import org.example.prenda.Prenda;
 
 public class Atuendo {
+
   public List<Prenda> prendas;
 
   public Atuendo(List<Prenda> prendas){
