@@ -1,9 +1,9 @@
-package org.example.sugerencia;
+package org.example.domain.sugerencia;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.example.Usuario;
-import org.example.prenda.Prenda;
+import org.example.domain.Usuario;
+import org.example.domain.prenda.Prenda;
 
 public class SugerenciasSegunFormalidad implements MotorSugerencias {
 

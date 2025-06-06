@@ -1,6 +1,6 @@
-package org.example.prenda;
+package org.example.domain.prenda;
 
-import org.example.borrador.Borrador;
+import org.example.domain.borrador.Borrador;
 
 public class Prenda {
 

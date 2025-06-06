@@ -1,6 +1,6 @@
-package org.example.sugerencia;
+package org.example.domain.sugerencia;
 
-import org.example.prenda.Prenda;
+import org.example.domain.prenda.Prenda;
 
 public class Sugerencia {
 

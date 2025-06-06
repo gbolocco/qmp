@@ -1,4 +1,4 @@
-package org.example.prenda;
+package org.example.domain.prenda;
 
 public class Material {
 

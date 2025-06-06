@@ -1,8 +1,8 @@
 package org.example.uniformesBonusQMP2.criteriosUniforme;
 
-import org.example.prenda.Prenda;
-import org.example.prenda.Material;
-import org.example.prenda.Tipo;
+import org.example.domain.prenda.Prenda;
+import org.example.domain.prenda.Material;
+import org.example.domain.prenda.Tipo;
 
 public class CriterioMaterial extends CriterioUniforme {
 

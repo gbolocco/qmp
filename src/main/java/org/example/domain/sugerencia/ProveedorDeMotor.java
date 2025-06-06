@@ -1,4 +1,4 @@
-package org.example.sugerencia;
+package org.example.domain.sugerencia;
 
 public class ProveedorDeMotor {
 

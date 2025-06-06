@@ -3,11 +3,11 @@ package org.example;
 // holaaa
 
 import java.util.List;
-import org.example.borrador.Borrador;
-import org.example.prenda.Color;
-import org.example.prenda.Material;
-import org.example.prenda.Prenda;
-import org.example.prenda.Tipo;
+import org.example.domain.borrador.Borrador;
+import org.example.domain.prenda.Color;
+import org.example.domain.prenda.Material;
+import org.example.domain.prenda.Prenda;
+import org.example.domain.prenda.Tipo;
 import org.example.uniformesBonusQMP2.Institucion;
 import org.example.uniformesBonusQMP2.Uniforme;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioColor;

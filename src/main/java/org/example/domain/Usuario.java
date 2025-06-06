@@ -1,11 +1,9 @@
-package org.example;
+package org.example.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import org.example.prenda.Prenda;
-import org.example.prenda.Tipo;
-import org.example.sugerencia.MotorSugerencias;
-import org.example.sugerencia.Sugerencia;
+import org.example.domain.prenda.Prenda;
+import org.example.domain.sugerencia.MotorSugerencias;
+import org.example.domain.sugerencia.Sugerencia;
 
 public class Usuario {
 

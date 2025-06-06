@@ -1,4 +1,4 @@
-package org.example.prenda;
+package org.example.domain.prenda;
 
 public enum Tipo {                //Los enums son objetos que pueden tener comportamiento y atributos!!!!
 

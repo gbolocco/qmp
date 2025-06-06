@@ -1,10 +1,10 @@
-package org.example.borrador;
+package org.example.domain.borrador;
 
-import org.example.prenda.Color;
-import org.example.prenda.Formalidad;
-import org.example.prenda.Material;
-import org.example.prenda.Prenda;
-import org.example.prenda.Tipo;
+import org.example.domain.prenda.Color;
+import org.example.domain.prenda.Formalidad;
+import org.example.domain.prenda.Material;
+import org.example.domain.prenda.Prenda;
+import org.example.domain.prenda.Tipo;
 
 public class Borrador {
 

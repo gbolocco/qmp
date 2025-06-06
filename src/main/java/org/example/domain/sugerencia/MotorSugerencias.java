@@ -1,7 +1,7 @@
-package org.example.sugerencia;
+package org.example.domain.sugerencia;
 
 import java.util.List;
-import org.example.Usuario;
+import org.example.domain.Usuario;
 
 public interface MotorSugerencias {
 

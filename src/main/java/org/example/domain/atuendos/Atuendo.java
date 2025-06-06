@@ -1,7 +1,7 @@
-package org.example.atuendos;
+package org.example.domain.atuendos;
 
 import java.util.List;
-import org.example.prenda.Prenda;
+import org.example.domain.prenda.Prenda;
 
 public class Atuendo {
 

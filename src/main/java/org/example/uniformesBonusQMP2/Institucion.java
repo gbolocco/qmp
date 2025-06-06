@@ -1,7 +1,7 @@
 package org.example.uniformesBonusQMP2;
 
 import java.util.List;
-import org.example.prenda.Prenda;
+import org.example.domain.prenda.Prenda;
 import org.example.uniformesBonusQMP2.criteriosUniforme.CriterioUniforme;
 
 public class Institucion {
