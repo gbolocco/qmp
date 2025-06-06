@@ -13,6 +13,8 @@ public class Borrador {
   public Color colorPrimario;
   public Color colorSecundario;
   public Formalidad formalidad;
+  public int indiceAbrigo;
+  public boolean impermeable;
 
     public Borrador(Tipo tipo, Material material){
       this.tipo = tipo;
@@ -24,17 +26,24 @@ public class Borrador {
       return this;
     }
 
+    public Borrador setImpermeable(boolean impermeable){
+      this.impermeable = impermeable;
+      return this;
+    }
+
+    public Borrador setIndiceAbrigo(int indiceAbrigo){
+      this.indiceAbrigo = indiceAbrigo;
+      return this;
+    }
+
     public Borrador setColorSecundario(Color colorSecundario){
       this.colorSecundario = colorSecundario;
       return this;
     }
 
-    public Borrador setFormalidad(Formalidad formalidad){
+    public void setFormalidad(Formalidad formalidad){
       this.formalidad = formalidad;
-      return this;
     }
-
-
 
   public Prenda crearPrenda(){ return new Prenda(this); }
 

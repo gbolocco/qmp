@@ -2,6 +2,7 @@ package org.example;
 
 import static org.mockito.Mockito.mock;
 
+import java.io.IOException;
 import java.util.List;
 import org.example.domain.Usuario;
 import org.example.domain.borrador.Borrador;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SugerenciasTest {
+public class SugerenciasTestQMP3 {
 
   Usuario usuario;
 
@@ -46,7 +47,9 @@ public class SugerenciasTest {
 
     Borrador borradorPantalon = new Borrador(Tipo.PANTALON, new Material(Material.TipoMaterial.TELA));
     borradorPantalon.setColorPrimario(Color.BLANCO);
-    borradorPantalon.setFormalidad(Formalidad.FORMAL);
+    borradorPantalon.setFormalidad(Formalidad.FORMAL);//  public QMP4Tests() throws IOException {
+//    clima = AccuWeatherService.getInstance().obtenerClima();
+//  }
     Prenda pantalonNegro = borradorPantalon.crearPrenda();
 
 
@@ -61,21 +64,21 @@ public class SugerenciasTest {
   }
 
   @Test
-  void seGenerarSugerencias(){
+  void seGenerarSugerencias() throws IOException {
     usuario.setMotor(new SugerenciaCombinaciones());
     List<Sugerencia> sugerencias = usuario.generarSugerencias();
     Assertions.assertFalse(sugerencias.isEmpty());
   }
 
   @Test
-  void seGeneranSugerenciasSegunMotorDeSugerenciasAleatorias(){
+  void seGeneranSugerenciasSegunMotorDeSugerenciasAleatorias() throws IOException {
     usuario.setMotor(new SugerenciaCombinaciones());
     List<Sugerencia> sugerencias = usuario.generarSugerencias();
     Assertions.assertEquals(2, sugerencias.size());
   }
 
   @Test
-  void seGeneranSugerenciasSegunMotorDeFormalidad(){
+  void seGeneranSugerenciasSegunMotorDeFormalidad() throws IOException {
     usuario.setMotor(new SugerenciasSegunFormalidad());
     List<Sugerencia> sugerencias = usuario.generarSugerencias();
     Assertions.assertEquals(1, sugerencias.size());

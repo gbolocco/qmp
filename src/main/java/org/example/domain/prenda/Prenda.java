@@ -10,6 +10,8 @@ public class Prenda {
   private Color colorPrimario;
   private Color colorSecundario;
   private Formalidad formalidad;
+  private int indiceAbrigo; // [1...10]
+  private boolean impermeable;
 
   //constructor
   public Prenda(Borrador borrador){
@@ -18,6 +20,8 @@ public class Prenda {
     this.colorSecundario = borrador.colorSecundario;
     this.material = borrador.material;
     this.formalidad = borrador.formalidad;
+    this.impermeable = borrador.impermeable;
+    this.indiceAbrigo = borrador.indiceAbrigo;
   }
 
   public Tipo getTipo() {
@@ -32,8 +36,12 @@ public class Prenda {
 
   public Material.TipoMaterial getMaterial() { return material.tipoMaterial; }
 
+  public int getIndiceAbrigo() { return indiceAbrigo; }
+
 
   // ------------------------------------------------------------------
+
+  public boolean esImpermeable() { return impermeable; }
 
   public Boolean esFormal() {
     return Formalidad.FORMAL == formalidad;

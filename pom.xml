@@ -40,6 +40,13 @@
             <version>5.11.0</version> <!-- O la última versión estable -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>5.11.0</version> <!-- pon la versión que usás -->
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 

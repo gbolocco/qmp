@@ -3,7 +3,7 @@ package org.example.domain.prenda;
 public class Material {
 
   public enum Trama {LISA, RAYADA, LUNARES, CUADROS, ESTAMPADO,PIQUE}
-  public enum TipoMaterial {ALGODON, TELA, CUERO, ACETATO, DE_VESTIR}
+  public enum TipoMaterial {ALGODON, TELA, CUERO, ACETATO, DE_VESTIR, POLAR, JEAN, NYLON}
 
   public Trama trama = Trama.LISA;
   public TipoMaterial tipoMaterial;

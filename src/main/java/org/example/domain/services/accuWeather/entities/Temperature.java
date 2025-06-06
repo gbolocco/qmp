@@ -4,14 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Temperature {
 
-//  @SerializedName("Metric")
-//  public Unit metric;
-//
-//  @SerializedName("Imperial")
-//  public Unit imperial;
-
-//  @SerializedName("Metric")
-//  public Unit metric;
   @SerializedName("Value")
   public float value;
 

@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.io.IOException;
 import java.util.List;
 import org.example.domain.prenda.Prenda;
 import org.example.domain.sugerencia.MotorSugerencias;
@@ -30,7 +31,11 @@ public class Usuario {
     return guardarropa;
   }
 
-  public List<Sugerencia> generarSugerencias(){
+  public List<Sugerencia> generarSugerencias() throws IOException {
     return this.motorSugerencias.generarSugerencias(this);
+  }
+
+  public void addPrenda(Prenda prenda) {
+    this.guardarropa.add(prenda);
   }
 }
