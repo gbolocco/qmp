@@ -16,6 +16,7 @@ public class SugerenciasSegunClima extends MotorSugerencias {
   }
 
   public List<Prenda> getPrendasValidas(Usuario usuario) throws IOException {
+
     Clima climaActual = accuWeatherService.obtenerClima();
 
     List<Prenda> guardarropa = usuario.getGuardarropa();
@@ -27,7 +28,7 @@ public class SugerenciasSegunClima extends MotorSugerencias {
     } else if (climaActual.temperature.value <= 15 && climaActual.temperature.value > 5) {
       guardarropa =  guardarropa.stream().filter(p -> p.getIndiceAbrigo() > 3).toList();
     } else {
-      guardarropa =  guardarropa.stream().filter(p -> p.getIndiceAbrigo() > 7).toList();
+      guardarropa =  guardarropa.stream().filter(p -> p.getIndiceAbrigo() >= 7).toList();
     }
 
     return guardarropa;

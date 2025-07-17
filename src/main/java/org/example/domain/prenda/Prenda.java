@@ -60,7 +60,7 @@ public class Prenda {
   }
 
   public Boolean esAccesorio() {
-    return Tipo.Categoria.ACCESORIO == tipo.getCategoria();
+    return Tipo.Categoria.ACCESORIO == getTipo().getCategoria();
   }
 
 }

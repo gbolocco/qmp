@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SugerenciasTestQMP3 {
+public class QMP3Tests {
 
   Usuario usuario;
 
@@ -47,9 +47,7 @@ public class SugerenciasTestQMP3 {
 
     Borrador borradorPantalon = new Borrador(Tipo.PANTALON, new Material(Material.TipoMaterial.TELA));
     borradorPantalon.setColorPrimario(Color.BLANCO);
-    borradorPantalon.setFormalidad(Formalidad.FORMAL);//  public QMP4Tests() throws IOException {
-//    clima = AccuWeatherService.getInstance().obtenerClima();
-//  }
+    borradorPantalon.setFormalidad(Formalidad.FORMAL);
     Prenda pantalonNegro = borradorPantalon.crearPrenda();
 
 

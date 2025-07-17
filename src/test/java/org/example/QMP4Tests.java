@@ -30,71 +30,110 @@ import org.mockito.MockedStatic;
 
 public class QMP4Tests {
 
-  private AccuWeatherService mockService;
-  private MotorSugerencias motor;
+  private AccuWeatherService mockServiceCalor;
+  private AccuWeatherService mockServiceFrio;
+  private AccuWeatherService mockServiceLluvioso;
+  private MotorSugerencias motorCalor;
+  private MotorSugerencias motorFrio;
+  private MotorSugerencias motorLluvioso;
+  private Usuario usuario;
   private List<Prenda> guardarropa;
-  private Prenda prenda;
 
 
   @BeforeEach
   void setup() throws IOException {
+
     // Crear mock del servicio
-    mockService = mock(AccuWeatherService.class);
+    mockServiceCalor = mock(AccuWeatherService.class);
+    mockServiceFrio = mock(AccuWeatherService.class);
+    mockServiceLluvioso = mock(AccuWeatherService.class);
 
     // Stub para el clima
-    Clima clima = new Clima();
-    clima.hasPrecipitation = false;
-    clima.temperature = new Temperature();
-    clima.temperature.value = 14;
+    Clima climaFrio = new Clima();
+    climaFrio.hasPrecipitation = false;
+    climaFrio.temperature = new Temperature();
+    climaFrio.temperature.value = 1;
 
-    when(mockService.obtenerClima()).thenReturn(clima);
+    Clima climaCalor= new Clima();
+    climaCalor.hasPrecipitation = false;
+    climaCalor.temperature = new Temperature();
+    climaCalor.temperature.value = 20;
+
+    Clima climaLluvioso= new Clima();
+    climaLluvioso.hasPrecipitation = true;
+    climaLluvioso.temperature = new Temperature();
+    climaLluvioso.temperature.value = 20;
+
+
+
+    when(mockServiceCalor.obtenerClima()).thenReturn(climaCalor);
+    when(mockServiceFrio.obtenerClima()).thenReturn(climaFrio);
+    when(mockServiceLluvioso.obtenerClima()).thenReturn(climaLluvioso);
 
     // Motor sugerencias
-    motor = new SugerenciasSegunClima(mockService);
-
-    Prenda parteSupCalor = mock(Prenda.class);
-    when(parteSupCalor.getTipo()).thenReturn(Tipo.CAMISA);
-    when(parteSupCalor.getIndiceAbrigo()).thenReturn(2);
-    when(parteSupCalor.esImpermeable()).thenReturn(false);
-
-    Prenda parteSupFrio = mock(Prenda.class);
-    when(parteSupFrio.getTipo()).thenReturn(Tipo.CAMISA);
-    when(parteSupFrio.getIndiceAbrigo()).thenReturn(8);
-    when(parteSupFrio.esImpermeable()).thenReturn(true);
-
-    Prenda parteInfFrio = mock(Prenda.class);
-    when(parteInfFrio.getTipo()).thenReturn(Tipo.PANTALON);
-    when(parteInfFrio.getIndiceAbrigo()).thenReturn(8);
-    when(parteInfFrio.esImpermeable()).thenReturn(true);
+    motorCalor= new SugerenciasSegunClima(mockServiceCalor);
+    motorFrio = new SugerenciasSegunClima(mockServiceFrio);
+    motorLluvioso = new SugerenciasSegunClima(mockServiceLluvioso);
 
 
-    Prenda parteInfCalor = mock(Prenda.class);
-    when(parteInfCalor.getTipo()).thenReturn(Tipo.PANTALON);
-    when(parteInfCalor.getIndiceAbrigo()).thenReturn(2);
-    when(parteInfCalor.esImpermeable()).thenReturn(false);
+    Borrador borradorParteInfFrio = new Borrador(Tipo.PANTALON, mock(Material.class));
+    borradorParteInfFrio.setImpermeable(false);
+    borradorParteInfFrio.setIndiceAbrigo(8);
+    Prenda parteInfFrio = borradorParteInfFrio.crearPrenda();
 
-    Prenda calzadoFrio = mock(Prenda.class);
-    when(calzadoFrio.getTipo()).thenReturn(Tipo.ZAPATO);
-    when(calzadoFrio.getIndiceAbrigo()).thenReturn(8);
-    when(calzadoFrio.esImpermeable()).thenReturn(true);
+    Borrador borradorParteInfCalor = new Borrador(Tipo.PANTALON, mock(Material.class));
+    borradorParteInfCalor.setImpermeable(false);
+    borradorParteInfCalor.setIndiceAbrigo(2);
+    Prenda parteInfCalor = borradorParteInfFrio.crearPrenda();
 
-    Prenda calzadoCalor = mock(Prenda.class);
-    when(calzadoCalor.getTipo()).thenReturn(Tipo.ZAPATO);
-    when(calzadoCalor.getIndiceAbrigo()).thenReturn(2);
-    when(calzadoCalor.esImpermeable()).thenReturn(false);
+    Borrador borradorCalzadoFrio =  new Borrador(Tipo.ZAPATO, mock(Material.class));
+    borradorCalzadoFrio.setImpermeable(false);
+    borradorCalzadoFrio.setIndiceAbrigo(8);
+    Prenda calzadoFrio = borradorCalzadoFrio.crearPrenda();
+
+    Borrador borradorCalzadoCalor = new Borrador(Tipo.ZAPATO, mock(Material.class));
+    borradorCalzadoCalor.setImpermeable(false);
+    borradorCalzadoCalor.setIndiceAbrigo(2);
+    Prenda calzadoCalor = borradorCalzadoCalor.crearPrenda();
+
+    Borrador borradorParteSupCalor = new Borrador(Tipo.CHOMBA, mock(Material.class));
+    borradorParteSupCalor.setImpermeable(false);
+    borradorParteSupCalor.setIndiceAbrigo(2);
+    Prenda parteSupCalor = borradorParteSupCalor.crearPrenda();
+
+    Borrador borradorParteSupFrio = new Borrador(Tipo.BUZO, mock(Material.class));
+    borradorParteSupFrio.setImpermeable(false);
+    borradorParteSupFrio.setIndiceAbrigo(8);
+    Prenda parteSupFrio = borradorParteSupFrio.crearPrenda();
+
 
     guardarropa = List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio);
+
+
+
+  }
+
+
+  @Test
+  void filtraPrendasValidasSegunClimaCaluroso() throws IOException {
+    Usuario usuario = new Usuario(guardarropa, 30, mock(MotorSugerencias.class));
+    assertFalse(motorCalor.getPrendasValidas(usuario).isEmpty());
+  }
+
+  @Test
+  void noObtienePrendasValidasPorqueElUsuarioNoTienePrendasImpermeable() throws IOException {
+    Usuario usuario = new Usuario(guardarropa, 30, mock(MotorSugerencias.class));
+    assertTrue(motorLluvioso.getPrendasValidas(usuario).isEmpty());
   }
 
   @Test
   void seGeneranSugerenciasSegunClima() throws IOException {
-    Usuario usuario = new Usuario(guardarropa, 30, motor);
+    Usuario usuario = new Usuario(guardarropa, 30, motorFrio);
     List<Sugerencia> sugerencias = usuario.generarSugerencias();
-    Assertions.assertFalse(sugerencias.isEmpty());
-//    System.out.println(motor.getPrendasValidas(usuario).size());
-//    assertFalse(motor.getPrendasValidas(usuario).isEmpty());
+    assertFalse(sugerencias.isEmpty());
   }
 
+// este test funciona, solo que le pega a la api real
 //  @Test
 //  void climaActual() throws IOException {
 //    Clima clima = AccuWeatherService.getInstance().obtenerClima();
