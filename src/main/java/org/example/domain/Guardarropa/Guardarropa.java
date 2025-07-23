@@ -44,6 +44,10 @@ public class Guardarropa {
     this.prendas.remove(prenda);
   }
 
+  public List<PropuestaGuardarropa> getPropuestasAceptadas() {
+    return this.propuestasAceptadas;
+  }
+
   public List<PropuestaGuardarropa> getPropuestas(){
       return this.propuestas;
   }
@@ -65,6 +69,11 @@ public class Guardarropa {
   public void rechazar(PropuestaGuardarropa propuesta) {
     propuesta.rechazar(this);
     this.removePropuesta(propuesta);
+  }
+
+  public void deshacer(PropuestaGuardarropa propuesta) {
+    propuesta.deshacer(this);
+    propuestasAceptadas.remove(propuesta);
   }
 
 

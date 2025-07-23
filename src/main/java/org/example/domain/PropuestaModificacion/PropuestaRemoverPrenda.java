@@ -14,4 +14,8 @@ public class PropuestaRemoverPrenda extends PropuestaGuardarropa {
   }
 
   public void rechazar(Guardarropa guardarropa){}
+
+  public void deshacer(Guardarropa guardarropa){
+    guardarropa.addPrenda(prenda);
+  }
 }

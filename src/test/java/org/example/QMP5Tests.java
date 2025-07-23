@@ -72,6 +72,15 @@ public class QMP5Tests {
     guardarropa.getPropuestas().stream().findFirst().ifPresent(guardarropa::aceptar);
     Assertions.assertFalse(guardarropa.getPrendas().contains(prenda));
   }
-}
 
-// TODO faltaria el ultimo requerimiento: Como usuarie de QuéMePongo, quiero poder deshacer las propuestas de modificación que haya aceptado.
+  @Test
+  void sePuedeDeshacerUnaModificacion(){
+    Guardarropa guardarropa = new Guardarropa(mock(Usuario.class),"test",  new ArrayList<>());
+    guardarropa.proponerAgregar(prenda);
+    guardarropa.getPropuestas().stream().findFirst().ifPresent(guardarropa::aceptar);
+    Assertions.assertTrue(guardarropa.getPrendas().contains(prenda));
+    guardarropa.getPropuestasAceptadas().stream().findFirst().ifPresent(guardarropa::deshacer);
+    Assertions.assertFalse(guardarropa.getPrendas().contains(prenda));
+  }
+
+}

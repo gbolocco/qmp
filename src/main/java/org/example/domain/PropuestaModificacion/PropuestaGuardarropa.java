@@ -16,4 +16,6 @@ public abstract class PropuestaGuardarropa {
 
   public abstract void rechazar(Guardarropa guardarropa);
 
+  public abstract void deshacer(Guardarropa guardarropa);
+
 }
