@@ -9,9 +9,8 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import org.example.domain.Guardarropa;
+import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Usuario;
 import org.example.domain.borrador.Borrador;
 import org.example.domain.prenda.Material;
@@ -23,11 +22,8 @@ import org.example.domain.services.accuWeather.entities.Temperature;
 import org.example.domain.sugerencia.MotorSugerencias;
 import org.example.domain.sugerencia.Sugerencia;
 import org.example.domain.sugerencia.SugerenciasSegunClima;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 
 public class QMP4Tests {
 
@@ -107,26 +103,25 @@ public class QMP4Tests {
     borradorParteSupFrio.setIndiceAbrigo(8);
     Prenda parteSupFrio = borradorParteSupFrio.crearPrenda();
 
-    guardarropa = new Guardarropa("test", List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio));
+    usuario = new Usuario(30,mock(MotorSugerencias.class));
+    usuario.crearGuardarropa("test", List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio));
 
   }
 
 
   @Test
   void filtraPrendasValidasSegunClimaCaluroso() throws IOException {
-    Usuario usuario = new Usuario(List.of(guardarropa), 30, mock(MotorSugerencias.class));
-    assertFalse(motorCalor.getPrendasValidas(usuario,guardarropa).isEmpty());
+    assertFalse(motorCalor.getPrendasValidas(usuario,usuario.getGuardarropaSegunCriterio("test")).isEmpty());
   }
 
   @Test
   void noObtienePrendasValidasPorqueElUsuarioNoTienePrendasImpermeable() throws IOException {
-    Usuario usuario = new Usuario(List.of(guardarropa), 30, mock(MotorSugerencias.class));
-    assertTrue(motorLluvioso.getPrendasValidas(usuario,guardarropa).isEmpty());
+    assertTrue(motorLluvioso.getPrendasValidas(usuario,usuario.getGuardarropaSegunCriterio("test")).isEmpty());
   }
 
   @Test
-  void seGeneranSugerenciasSegunClima() throws IOException {
-    Usuario usuario = new Usuario(List.of(guardarropa), 30, motorFrio);
+  void seGeneranSugerenciasSegunClima() throws Exception {
+    usuario.setMotor(motorFrio);
     List<Sugerencia> sugerencias = usuario.generarSugerencias("test");
     assertFalse(sugerencias.isEmpty());
   }

@@ -3,7 +3,7 @@ package org.example.domain.sugerencia;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.example.domain.Guardarropa;
+import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Usuario;
 import org.example.domain.prenda.Prenda;
 

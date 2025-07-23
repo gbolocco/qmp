@@ -4,7 +4,7 @@ import static org.mockito.Mockito.mock;
 
 import java.io.IOException;
 import java.util.List;
-import org.example.domain.Guardarropa;
+import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Usuario;
 import org.example.domain.borrador.Borrador;
 import org.example.domain.prenda.Color;
@@ -52,10 +52,9 @@ public class QMP3Tests {
     borradorPantalon.setFormalidad(Formalidad.FORMAL);
     Prenda pantalonNegro = borradorPantalon.crearPrenda();
 
-    Guardarropa guardarropa = new Guardarropa("test",List.of(zapatoNegroDeCuero, zapatoDeTelaAmarilla, pantalonNegro, camisaBlanca));
 
-
-    usuario = new Usuario(List.of(guardarropa),69 , new SugerenciaCombinaciones());
+    usuario = new Usuario(69 , new SugerenciaCombinaciones());
+    usuario.crearGuardarropa("test", List.of(zapatoNegroDeCuero, zapatoDeTelaAmarilla, pantalonNegro, camisaBlanca));
 
   }
 
@@ -67,25 +66,25 @@ public class QMP3Tests {
 
   @Test
   void guardarropasConPrendas(){
-    Assertions.assertFalse(usuario.getGuardarropa("test").getPrendas().isEmpty());
+    Assertions.assertFalse(usuario.getGuardarropaSegunCriterio("test").getPrendas().isEmpty());
   }
 
   @Test
-  void seGenerarSugerencias() throws IOException {
+  void seGenerarSugerencias() throws Exception {
     usuario.setMotor(new SugerenciaCombinaciones());
     List<Sugerencia> sugerencias = usuario.generarSugerencias("test");
     Assertions.assertFalse(sugerencias.isEmpty());
   }
 
   @Test
-  void seGeneranSugerenciasSegunMotorDeSugerenciasAleatorias() throws IOException {
+  void seGeneranSugerenciasSegunMotorDeSugerenciasAleatorias() throws Exception {
     usuario.setMotor(new SugerenciaCombinaciones());
     List<Sugerencia> sugerencias = usuario.generarSugerencias("test");
     Assertions.assertEquals(2, sugerencias.size());
   }
 
   @Test
-  void seGeneranSugerenciasSegunMotorDeFormalidad() throws IOException {
+  void seGeneranSugerenciasSegunMotorDeFormalidad() throws Exception {
     usuario.setMotor(new SugerenciasSegunFormalidad());
     List<Sugerencia> sugerencias = usuario.generarSugerencias("test");
     Assertions.assertEquals(1, sugerencias.size());
