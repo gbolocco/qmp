@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.domain.Guardarropa;
 import org.example.domain.Usuario;
 import org.example.domain.borrador.Borrador;
 import org.example.domain.prenda.Material;
@@ -37,7 +38,7 @@ public class QMP4Tests {
   private MotorSugerencias motorFrio;
   private MotorSugerencias motorLluvioso;
   private Usuario usuario;
-  private List<Prenda> guardarropa;
+  private Guardarropa guardarropa;
 
 
   @BeforeEach
@@ -106,30 +107,27 @@ public class QMP4Tests {
     borradorParteSupFrio.setIndiceAbrigo(8);
     Prenda parteSupFrio = borradorParteSupFrio.crearPrenda();
 
-
-    guardarropa = List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio);
-
-
+    guardarropa = new Guardarropa("test", List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio));
 
   }
 
 
   @Test
   void filtraPrendasValidasSegunClimaCaluroso() throws IOException {
-    Usuario usuario = new Usuario(guardarropa, 30, mock(MotorSugerencias.class));
-    assertFalse(motorCalor.getPrendasValidas(usuario).isEmpty());
+    Usuario usuario = new Usuario(List.of(guardarropa), 30, mock(MotorSugerencias.class));
+    assertFalse(motorCalor.getPrendasValidas(usuario,guardarropa).isEmpty());
   }
 
   @Test
   void noObtienePrendasValidasPorqueElUsuarioNoTienePrendasImpermeable() throws IOException {
-    Usuario usuario = new Usuario(guardarropa, 30, mock(MotorSugerencias.class));
-    assertTrue(motorLluvioso.getPrendasValidas(usuario).isEmpty());
+    Usuario usuario = new Usuario(List.of(guardarropa), 30, mock(MotorSugerencias.class));
+    assertTrue(motorLluvioso.getPrendasValidas(usuario,guardarropa).isEmpty());
   }
 
   @Test
   void seGeneranSugerenciasSegunClima() throws IOException {
-    Usuario usuario = new Usuario(guardarropa, 30, motorFrio);
-    List<Sugerencia> sugerencias = usuario.generarSugerencias();
+    Usuario usuario = new Usuario(List.of(guardarropa), 30, motorFrio);
+    List<Sugerencia> sugerencias = usuario.generarSugerencias("test");
     assertFalse(sugerencias.isEmpty());
   }
 
