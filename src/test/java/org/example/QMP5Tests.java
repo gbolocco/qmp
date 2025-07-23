@@ -3,6 +3,7 @@ package org.example;
 import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
+import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Usuario;
 import org.example.domain.prenda.Prenda;
 import org.example.domain.sugerencia.MotorSugerencias;
@@ -14,6 +15,7 @@ public class QMP5Tests {
 
   Usuario propietario;
   Usuario colaborador;
+  Prenda prenda;
 
   @BeforeEach
   public void setUp() throws Exception {
@@ -25,6 +27,8 @@ public class QMP5Tests {
     colaborador = new Usuario(20, mock(MotorSugerencias.class));
 
     propietario.addColaborador(colaborador, "test");
+
+    prenda =  mock(Prenda.class);
 
   }
 
@@ -50,4 +54,24 @@ public class QMP5Tests {
     Assertions.assertFalse(propietario.getGuardarropaSegunCriterio("test").getPrendas().contains(prenda));
   }
 
+  @Test
+  void sePuedeAceptarPropuestaYAgregarUnaPrenda() throws Exception {
+    Guardarropa guardarropa = new Guardarropa(mock(Usuario.class),"test",  new ArrayList<>());
+    guardarropa.proponerAgregar(prenda);
+    Assertions.assertTrue(guardarropa.getPrendas().isEmpty());
+    guardarropa.getPropuestas().stream().findFirst().ifPresent(guardarropa::aceptar);
+    Assertions.assertTrue(guardarropa.getPrendas().contains(prenda));
+  }
+
+  @Test
+  void sePuedeaceptarPropuestaYRemoverUnaPrenda() throws Exception {
+    Guardarropa guardarropa = new Guardarropa(mock(Usuario.class),"test", new ArrayList<>());
+    guardarropa.addPrenda(prenda);
+    guardarropa.proponerRemover(prenda);
+    Assertions.assertFalse(guardarropa.getPrendas().isEmpty());
+    guardarropa.getPropuestas().stream().findFirst().ifPresent(guardarropa::aceptar);
+    Assertions.assertFalse(guardarropa.getPrendas().contains(prenda));
+  }
 }
+
+// TODO faltaria el ultimo requerimiento: Como usuarie de QuéMePongo, quiero poder deshacer las propuestas de modificación que haya aceptado.

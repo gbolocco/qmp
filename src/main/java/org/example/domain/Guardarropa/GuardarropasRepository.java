@@ -16,12 +16,12 @@ public class GuardarropasRepository {
     return instance;
   }
 
-  public void addGuardarropa(Guardarropa guardropa) {
-    this.guardarropas.add(guardropa);
+  public void addGuardarropa(Guardarropa guardarropa) {
+    this.guardarropas.add(guardarropa);
   }
 
-  public List<Guardarropa> getGuardarropas(Usuario usuario) {
-    return guardarropas.stream().filter(g -> g.tienePermisoLectura(usuario)).toList();
+  public List<Guardarropa> getGuardarropas() {
+    return guardarropas;
   }
 
 }

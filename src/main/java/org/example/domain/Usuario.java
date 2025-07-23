@@ -2,6 +2,7 @@ package org.example.domain;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Guardarropa.GuardarropasRepository;
 import org.example.domain.PropuestaModificacion.PropuestaGuardarropa;
@@ -17,12 +18,6 @@ public class Usuario {
   public Usuario(Integer edad, MotorSugerencias motor) {
     this.edad = edad;
     this.motorSugerencias = motor;
-  }
-
-  public void validarPermisoEscritura(Guardarropa guardarropa) throws Exception {
-    if (!guardarropa.tienePermisoEscritura(this)) {
-      throw new Exception("No tiene permisos para ejecutar accion");
-    }
   }
 
 
@@ -41,8 +36,10 @@ public class Usuario {
     return this.motorSugerencias.generarSugerencias(this, guardarropa);
   }
 
+  // TODO meter refactor aca, ver q onda con las validaciones y permisos
+
   public List<Guardarropa> getGuardarropas() {
-    return GuardarropasRepository.getInstance().getGuardarropas(this);
+    return GuardarropasRepository.getInstance().getGuardarropas().stream().filter(g -> g.tienePermisoLectura(this)).toList();
   }
 
   public Guardarropa getGuardarropaSegunCriterio(String criterio) {
@@ -52,6 +49,24 @@ public class Usuario {
         .orElseThrow(() -> new NoSuchElementException("No se encontró guardarropa con criterio: " + criterio));
   }
 
+  public List<Guardarropa> getGuardarropasPropios() {
+    return GuardarropasRepository.getInstance().getGuardarropas().stream().filter(g -> g.esPropietario(this)).toList();
+  }
+
+  public Guardarropa getGuardarropaPropioSegunCriterio(String criterio) {
+    return this.getGuardarropasPropios().stream()
+        .filter(g -> g.getCriterio().equals(criterio))
+        .findFirst()
+        .orElseThrow(() -> new NoSuchElementException("No se encontró guardarropa con criterio: " + criterio));
+  }
+
+//========================
+
+  public List<PropuestaGuardarropa> getPropuestasGuardarropa(String criterio) throws Exception {
+    Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
+    return guardarropa.getPropuestas();
+  }
+
   public void crearGuardarropa(String criterio, List<Prenda> prendas) {
     Guardarropa nuevoGuardarropa = new Guardarropa(this, criterio, prendas);
     GuardarropasRepository.getInstance().addGuardarropa(nuevoGuardarropa);
@@ -59,32 +74,24 @@ public class Usuario {
 
 
   public void addPrenda(String criterio, Prenda prenda) throws Exception {
-    Guardarropa guardarropa = this.getGuardarropaSegunCriterio(criterio);
-    validarPermisoEscritura(guardarropa);
+    Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
     guardarropa.addPrenda(prenda);
   }
 
   public void removePrenda(String criterio, Prenda prenda) throws Exception {
-    Guardarropa guardarropa = this.getGuardarropaSegunCriterio(criterio);
-    validarPermisoEscritura(guardarropa);
+    Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
     guardarropa.removePrenda(prenda);
   }
 
 
-  public void realizarPropuestaModificacion(PropuestaGuardarropa propuesta) {
-
-  }
-
 
   public void addColaborador(Usuario colaborador, String criterio) throws Exception {
-    Guardarropa guardarropa = this.getGuardarropaSegunCriterio(criterio);
-    validarPermisoEscritura(guardarropa);
+    Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
     guardarropa.addColaborador(colaborador);
   }
 
   public void removeColaborador(Usuario colaborador, String criterio) throws Exception {
-    Guardarropa guardarropa = this.getGuardarropaSegunCriterio(criterio);
-    validarPermisoEscritura(guardarropa);
+    Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
     guardarropa.removeColaborador(colaborador);
   }
 

@@ -1,16 +1,19 @@
 package org.example.domain.PropuestaModificacion;
 
-import org.example.domain.Usuario;
+import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.prenda.Prenda;
 
 public abstract class PropuestaGuardarropa {
 
   public Prenda prenda;
-  public Usuario destinatario;
   public String criterio;
 
-  public abstract void aceptar();
+  public PropuestaGuardarropa(Prenda prenda) {
+    this.prenda = prenda;
+  }
 
-  public abstract void rechazar();
+  public abstract void aceptar(Guardarropa guardarropa);
+
+  public abstract void rechazar(Guardarropa guardarropa);
 
 }
