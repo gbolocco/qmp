@@ -1,8 +1,10 @@
 package org.example.domain.services.accuWeather;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.example.domain.alerta.AlertaMeteorologica;
 import org.example.domain.services.accuWeather.entities.Clima;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -72,5 +74,10 @@ public class AccuWeatherService {
     } else {
       return null;
     }
+  }
+
+  // TODO (no se porque no funciona la api alertas de accuweather)
+  public List<AlertaMeteorologica> obtenerAlertas(String ciudad) throws IOException {
+    return new ArrayList<AlertaMeteorologica>();
   }
 }

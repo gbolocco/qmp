@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Guardarropa.GuardarropasRepository;
 import org.example.domain.PropuestaModificacion.PropuestaGuardarropa;
+import org.example.domain.alerta.AlertaMeteorologica;
 import org.example.domain.prenda.Prenda;
 import org.example.domain.services.accuWeather.AccuWeatherService;
 import org.example.domain.services.accuWeather.entities.Clima;
@@ -17,6 +18,8 @@ public class Usuario {
   public Integer edad;
   public MotorSugerencias motorSugerencias;
   public String ubicacion;
+
+  public List<Sugerencia> sugerenciasDiarias;
 
   public Usuario(Integer edad, MotorSugerencias motor, String ubicacion) {
     this.edad = edad;
@@ -114,8 +117,12 @@ public class Usuario {
     return service.obtenerClima(this.getUbicacion());
   }
 
-  public List<Sugerencia> generarSugerenciasDiarias() throws Exception {
-    return this.generarSugerencias(this.getGuardarropaRandom().getCriterio());
+  public void generarSugerenciasDiarias() throws Exception {
+     this.sugerenciasDiarias = this.generarSugerencias(this.getGuardarropaRandom().getCriterio());
+  }
+
+  public List<AlertaMeteorologica> getAlertas(AccuWeatherService service) throws IOException {
+    return service.obtenerAlertas(this.getUbicacion());
   }
 
 }
