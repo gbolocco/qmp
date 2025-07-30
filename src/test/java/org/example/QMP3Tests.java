@@ -2,10 +2,9 @@ package org.example;
 
 import static org.mockito.Mockito.mock;
 
-import java.io.IOException;
 import java.util.List;
 import org.example.domain.Guardarropa.Guardarropa;
-import org.example.domain.Usuario;
+import org.example.domain.usuario.Usuario;
 import org.example.domain.borrador.Borrador;
 import org.example.domain.prenda.Color;
 import org.example.domain.prenda.Formalidad;
@@ -53,7 +52,7 @@ public class QMP3Tests {
     Prenda pantalonNegro = borradorPantalon.crearPrenda();
 
 
-    usuario = new Usuario(69 , new SugerenciaCombinaciones());
+    usuario = new Usuario(69 , new SugerenciaCombinaciones(),"test");
     usuario.crearGuardarropa("test", List.of(zapatoNegroDeCuero, zapatoDeTelaAmarilla, pantalonNegro, camisaBlanca));
 
   }

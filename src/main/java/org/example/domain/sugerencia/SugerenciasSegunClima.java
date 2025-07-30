@@ -3,7 +3,7 @@ package org.example.domain.sugerencia;
 import java.io.IOException;
 import java.util.List;
 import org.example.domain.Guardarropa.Guardarropa;
-import org.example.domain.Usuario;
+import org.example.domain.usuario.Usuario;
 import org.example.domain.prenda.Prenda;
 import org.example.domain.services.accuWeather.AccuWeatherService;
 import org.example.domain.services.accuWeather.entities.Clima;
@@ -18,7 +18,7 @@ public class SugerenciasSegunClima extends MotorSugerencias {
 
   public List<Prenda> getPrendasValidas(Usuario usuario, Guardarropa guardarropa) throws IOException {
 
-    Clima climaActual = accuWeatherService.obtenerClima();
+    Clima climaActual = accuWeatherService.obtenerClima(usuario.getUbicacion());
 
     List<Prenda> prendas = guardarropa.getPrendas();
 

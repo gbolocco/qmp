@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.List;
 import org.example.domain.Guardarropa.Guardarropa;
-import org.example.domain.Usuario;
+import org.example.domain.usuario.Usuario;
 import org.example.domain.borrador.Borrador;
 import org.example.domain.prenda.Material;
 import org.example.domain.prenda.Prenda;
@@ -63,9 +63,9 @@ public class QMP4Tests {
 
 
 
-    when(mockServiceCalor.obtenerClima()).thenReturn(climaCalor);
-    when(mockServiceFrio.obtenerClima()).thenReturn(climaFrio);
-    when(mockServiceLluvioso.obtenerClima()).thenReturn(climaLluvioso);
+    when(mockServiceCalor.obtenerClima("test")).thenReturn(climaCalor);
+    when(mockServiceFrio.obtenerClima("test")).thenReturn(climaFrio);
+    when(mockServiceLluvioso.obtenerClima("test")).thenReturn(climaLluvioso);
 
     // Motor sugerencias
     motorCalor= new SugerenciasSegunClima(mockServiceCalor);
@@ -103,7 +103,7 @@ public class QMP4Tests {
     borradorParteSupFrio.setIndiceAbrigo(8);
     Prenda parteSupFrio = borradorParteSupFrio.crearPrenda();
 
-    usuario = new Usuario(30,mock(MotorSugerencias.class));
+    usuario = new Usuario(30,mock(MotorSugerencias.class), "test");
     usuario.crearGuardarropa("test", List.of(parteInfFrio, parteInfCalor, calzadoFrio, calzadoCalor, parteSupCalor, parteSupFrio));
 
   }
@@ -126,15 +126,16 @@ public class QMP4Tests {
     assertFalse(sugerencias.isEmpty());
   }
 
-// este test funciona, solo que le pega a la api real
+////// este test funciona, solo que le pega a la api real
 //  @Test
 //  void climaActual() throws IOException {
-//    Clima clima = AccuWeatherService.getInstance().obtenerClima();
+//
+//    Clima clima = AccuWeatherService.getInstance().obtenerClima("Ushuaia");
 //    System.out.println("Temperatura: " + clima.temperature.value + "°" + clima.temperature.unit);
 //    System.out.println("Descripción: " + clima.iconPhrase);
 //    System.out.println("Esta lloviendo: " + clima.hasPrecipitation);
 //    System.out.println("Probabilidad de lluvia: " + clima.precipitationProbability);
-//    Assertions.assertNotNull(clima);
+//    assertNotNull(clima);
 //  }
 
 }

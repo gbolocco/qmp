@@ -5,7 +5,7 @@ import java.util.List;
 import org.example.domain.PropuestaModificacion.PropuestaAgregarPrenda;
 import org.example.domain.PropuestaModificacion.PropuestaGuardarropa;
 import org.example.domain.PropuestaModificacion.PropuestaRemoverPrenda;
-import org.example.domain.Usuario;
+import org.example.domain.usuario.Usuario;
 import org.example.domain.prenda.Prenda;
 
 public class Guardarropa {

@@ -4,7 +4,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import org.example.domain.Guardarropa.Guardarropa;
-import org.example.domain.Usuario;
+import org.example.domain.usuario.Usuario;
 import org.example.domain.prenda.Prenda;
 import org.example.domain.sugerencia.MotorSugerencias;
 import org.junit.jupiter.api.Assertions;
@@ -20,11 +20,11 @@ public class QMP5Tests {
   @BeforeEach
   public void setUp() throws Exception {
 
-    propietario = new Usuario(20, mock(MotorSugerencias.class));
+    propietario = new Usuario(20, mock(MotorSugerencias.class), "test");
 
     propietario.crearGuardarropa("test", new ArrayList<>());
 
-    colaborador = new Usuario(20, mock(MotorSugerencias.class));
+    colaborador = new Usuario(20, mock(MotorSugerencias.class), "test");
 
     propietario.addColaborador(colaborador, "test");
 

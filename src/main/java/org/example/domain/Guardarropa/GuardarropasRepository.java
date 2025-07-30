@@ -2,7 +2,6 @@ package org.example.domain.Guardarropa;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.example.domain.Usuario;
 
 public class GuardarropasRepository {
 

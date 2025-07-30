@@ -1,12 +1,14 @@
-package org.example.domain;
+package org.example.domain.usuario;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 import org.example.domain.Guardarropa.Guardarropa;
 import org.example.domain.Guardarropa.GuardarropasRepository;
 import org.example.domain.PropuestaModificacion.PropuestaGuardarropa;
 import org.example.domain.prenda.Prenda;
+import org.example.domain.services.accuWeather.AccuWeatherService;
+import org.example.domain.services.accuWeather.entities.Clima;
 import org.example.domain.sugerencia.MotorSugerencias;
 import org.example.domain.sugerencia.Sugerencia;
 
@@ -14,9 +16,11 @@ public class Usuario {
 
   public Integer edad;
   public MotorSugerencias motorSugerencias;
+  public String ubicacion;
 
-  public Usuario(Integer edad, MotorSugerencias motor) {
+  public Usuario(Integer edad, MotorSugerencias motor, String ubicacion) {
     this.edad = edad;
+    this.ubicacion = ubicacion;
     this.motorSugerencias = motor;
   }
 
@@ -60,6 +64,10 @@ public class Usuario {
         .orElseThrow(() -> new NoSuchElementException("No se encontró guardarropa con criterio: " + criterio));
   }
 
+  public Guardarropa getGuardarropaRandom() {
+    return this.getGuardarropas().stream().findAny().orElseThrow(() -> new NoSuchElementException("No posee guardarropas"));
+  }
+
 //========================
 
   public List<PropuestaGuardarropa> getPropuestasGuardarropa(String criterio) throws Exception {
@@ -93,6 +101,21 @@ public class Usuario {
   public void removeColaborador(Usuario colaborador, String criterio) throws Exception {
     Guardarropa guardarropa = this.getGuardarropaPropioSegunCriterio(criterio);
     guardarropa.removeColaborador(colaborador);
+  }
+
+  // =======================================
+
+
+  public String getUbicacion() {
+    return ubicacion;
+  }
+
+  public Clima getClimaActual(AccuWeatherService service) throws IOException {
+    return service.obtenerClima(this.getUbicacion());
+  }
+
+  public List<Sugerencia> generarSugerenciasDiarias() throws Exception {
+    return this.generarSugerencias(this.getGuardarropaRandom().getCriterio());
   }
 
 }
